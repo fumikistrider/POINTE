@@ -45,6 +45,7 @@ void GreenState::draw()
 	ofBackground(0, 255, 0);
 	ofSetColor(255, 0, 0);
 	ofDrawBitmapString(ofToString(getSharedData().counter), ofGetWidth() >> 1, ofGetHeight() >> 1);
+	ofDrawBitmapString(getSharedData().midiMessage.toString(), 20, 20);
 }
 
 string GreenState::getName()

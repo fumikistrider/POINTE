@@ -3,9 +3,10 @@
 #include "ofMain.h"
 
 #include "ofxStateMachine.h"
+#include "ofxMidi.h"
 #include "SharedData.h"
 
-class ofApp : public ofBaseApp{
+class ofApp : public ofBaseApp, public ofxMidiListener{
 
 	public:
 		void setup();
@@ -23,6 +24,10 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+
+		void newMidiMessage(ofxMidiMessage& eventArgs);
+		ofxMidiIn midiIn;
+		ofxMidiMessage midiMessage;
 
 		itg::ofxStateMachine<SharedData> stateMachine;
 

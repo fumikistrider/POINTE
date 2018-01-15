@@ -2,5 +2,6 @@ ofxAssimpModelLoader
 ofxBoids
 ofxGrabCam
 ofxGui
+ofxMidi
 ofxOsc
 ofxStateMachine
