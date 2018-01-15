@@ -1,0 +1,6 @@
+ofxAssimpModelLoader
+ofxBoids
+ofxGrabCam
+ofxGui
+ofxOsc
+ofxStateMachine
