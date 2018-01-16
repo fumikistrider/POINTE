@@ -1,0 +1,25 @@
+<group>
+	<boid_vector>0</boid_vector>
+	<align>31.5</align>
+	<cohesion>39</cohesion>
+	<separate>42.5</separate>
+	<dist_align>43.5</dist_align>
+	<dist_cohesion>47</dist_cohesion>
+	<dist_separate>47.5</dist_separate>
+	<max_force>42.75</max_force>
+	<max_speed>7.62</max_speed>
+	<max_turn>59.5</max_turn>
+	<attr_force>-0.71</attr_force>
+	<attr_dist>80</attr_dist>
+<group/>
+<attr_x>-75</attr_x>
+	<attr_y>11</attr_y>
+	<attr_z>100</attr_z>
+<camera_x>-142.293</camera_x>
+	<camera_y>114.147</camera_y>
+	<camera_z>307.358</camera_z>
+<camera_lookat_x>0.398117</camera_lookat_x>
+	<camera_lookat_y>-0.319369</camera_lookat_y>
+	<camera_lookat_z>-0.859946</camera_lookat_z>
+<space_size>183</space_size>
+</group>

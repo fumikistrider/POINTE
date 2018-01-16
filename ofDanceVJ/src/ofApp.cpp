@@ -1,6 +1,7 @@
 #include "ofApp.h"
 #include "RedState.h"
 #include "GreenState.h"
+#include "AttractorSoloState.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -10,10 +11,8 @@ void ofApp::setup(){
 	stateMachine.getSharedData().lastUpdate = ofGetElapsedTimeMillis();
 
 	// print input ports to console
-	midiIn.listPorts(); // via instance
-						//ofxMidiIn::listPorts(); // via static as well
+	midiIn.listPorts(); 
 
-						// open port by number (you may need to change this)
 	midiIn.openPort(0);
 	//midiIn.openPort("IAC Pure Data In");	// by name
 	//midiIn.openVirtualPort("ofxMidiIn Input"); // open a virtual port
@@ -31,7 +30,8 @@ void ofApp::setup(){
 	// initialise state machine
 	stateMachine.addState<RedState>();
 	stateMachine.addState<GreenState>();
-	stateMachine.changeState("green");
+	stateMachine.addState<AttractorSoloState>();
+	stateMachine.changeState("AttractorSolo");
 }
 
 //--------------------------------------------------------------
