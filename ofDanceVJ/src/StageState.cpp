@@ -35,13 +35,24 @@ void StageState::setup() {
 	gui.add(space_size.setup("space_size", 100, 100, 250));
 	gui.loadFromFile("gui.xml");
 
+	gui_light.setup();
+	gui_light.add(specular_light.setup("specular_light", ofFloatColor(0.5, 0.5, 0.5), ofFloatColor(0, 0, 0), ofFloatColor(1, 1, 1)));
+	gui_light.add(diffuse_light.setup("diffuse_light", ofFloatColor(0.5, 0.5, 0.5), ofFloatColor(0, 0, 0), ofFloatColor(1, 1, 1)));
+	gui_light.add(ambient_light.setup("ambient_light", ofFloatColor(0.5, 0.5, 0.5), ofFloatColor(0, 0, 0), ofFloatColor(1, 1, 1)));
+	gui_light.add(specular_material.setup("specular_material", ofFloatColor(0.5, 0.5, 0.5), ofFloatColor(0, 0, 0), ofFloatColor(1, 1, 1)));
+	gui_light.add(diffuse_material.setup("diffuse_material", ofFloatColor(0.5, 0.5, 0.5), ofFloatColor(0, 0, 0), ofFloatColor(1, 1, 1)));
+	gui_light.add(ambient_material.setup("ambient_material", ofFloatColor(0.5, 0.5, 0.5), ofFloatColor(0, 0, 0), ofFloatColor(1, 1, 1)));
+	gui_light.add(emmisive_material.setup("emmisive_material", ofFloatColor(0.5, 0.5, 0.5), ofFloatColor(0, 0, 0), ofFloatColor(1, 1, 1)));
+	gui_light.add(shiness_material.setup("shiness", 0, -128, 128));
+	gui_light.setPosition(ofGetWidth() - 200, 0);
+
 	camera.setPosition(camera_x, camera_y, camera_z);
 	camera.lookAt(ofVec3f(camera_lookat_x, camera_lookat_y, camera_lookat_z));
 
 	ofEnableSmoothing();
 	light.enable();
 	light.setPointLight();
-	light.setPosition(0, 500, 100);
+	light.setPosition(0, 100, 100);
 	light.setAmbientColor(ofFloatColor(1.0, 1.0, 1.0, 1.0));
 	light.setDiffuseColor(ofFloatColor(0.8, 0.8, 1.0));
 	light.setSpecularColor(ofFloatColor(1.0, 1.0, 1.0));
@@ -67,6 +78,7 @@ void StageState::setup() {
 	orpheLeft.loadModel("Orphe3D_L.3ds", false);
 	orpheRight.loadModel("Orphe3D_R.3ds", false);
 	stage.loadModel("Cyclorama.fbx");
+	//stage.loadModel("models/stage.obj");
 
 	fbo.allocate(ofGetWidth(), ofGetHeight());
 
@@ -84,7 +96,7 @@ void StageState::stateExit() {
 //--------------------------------------------------------------
 void StageState::update() {
 
-	flock.setBounds(-space_size, -space_size, -space_size, space_size, space_size, space_size);
+	flock.setBounds(-space_size, 0, -100, space_size, space_size, space_size);
 	flock.setAlign(align);
 	flock.setCohesion(cohesion);
 	flock.setSeparate(separate);
@@ -112,6 +124,7 @@ void StageState::update() {
 	camera.lookAt(ofVec3f(0, 0, 0));
 	//camera.lookAt(ofVec3f(attr_x, attr_y, attr_z));
 
+
 	flock.update();
 
 	fbo.begin();
@@ -121,13 +134,28 @@ void StageState::update() {
 		ofEnableLighting();
 		camera.begin();
 
+		light.enable();
+		light.setAmbientColor(ambient_light);
+		light.setDiffuseColor(diffuse_light);
+		light.setSpecularColor(specular_light);
+		material_stage.setAmbientColor(ambient_material);
+		material_stage.setDiffuseColor(diffuse_material);
+		material_stage.setSpecularColor(specular_material);
+		material_stage.setEmissiveColor(emmisive_material);
+		material_stage.setShininess(shiness_material);
+
 		ofPushMatrix();
 		ofSetColor(255, 255, 255, 255);
 		stage.setScale(1, 1, 1);
 		stage.setPosition(0, 0, 0);
 		ofRotate(180);
+		material_stage.begin();
 		stage.drawFaces();
+		material_stage.end();
 		ofPopMatrix();
+
+		int rep = space_size / 10;
+		ofDrawGrid(10.0f, rep, true);
 
 		for (int i = 0; i < flock.attractionPoints.size(); i++) {
 			AttractionPoint3d * ap = flock.attractionPoints[i];
@@ -209,7 +237,7 @@ void StageState::draw() {
 	glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);
 	gui.draw();
-
+	gui_light.draw();
 }
 
 

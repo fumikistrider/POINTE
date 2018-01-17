@@ -47,8 +47,14 @@ public:
 	ofxFloatSlider camera_lookat_z;
 	ofxIntSlider   space_size;
 
+	ofxPanel gui_light;
+	ofxFloatColorSlider specular_light, diffuse_light, ambient_light,
+		specular_material, diffuse_material, ambient_material, emmisive_material;
+	ofxFloatSlider shiness_material;
+
 	ofLight light;
 	ofLight lightShoes;
+	ofMaterial material_stage;
 
 	ofxGrabCam camera;
 	ofMatrix4x4 savedPose;
