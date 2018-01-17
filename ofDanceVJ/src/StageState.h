@@ -13,18 +13,18 @@
 class StageState : public itg::ofxState<SharedData> {
 
 public:
+	~StageState();
 	void setup();
 	void update();
 	void draw();
 	void stateExit();
-
 	void keyPressed(int key);
 
 	string getName();
 
 	Flock3d flock;
 	ofxPanel gui;
-	ofxToggle boid_vector;
+	ofxToggle toggleGrid;
 	ofxFloatSlider align;
 	ofxFloatSlider cohesion;
 	ofxFloatSlider separate;

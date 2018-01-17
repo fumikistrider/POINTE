@@ -1,0 +1,26 @@
+<group>
+	<boid_vector>0</boid_vector>
+	<align>65</align>
+	<cohesion>20</cohesion>
+	<separate>28</separate>
+	<dist_align>65</dist_align>
+	<dist_cohesion>47</dist_cohesion>
+	<dist_separate>63</dist_separate>
+	<max_force>18</max_force>
+	<max_speed>7.7</max_speed>
+	<max_turn>75</max_turn>
+	<attr_force>-0.71</attr_force>
+	<attr_dist>80</attr_dist>
+	<camera_x>-115.299</camera_x>
+	<camera_y>133.175</camera_y>
+	<camera_z>219.426</camera_z>
+	<camera_lookat_x>0.409757</camera_lookat_x>
+	<camera_lookat_y>-0.473283</camera_lookat_y>
+	<camera_lookat_z>-0.779809</camera_lookat_z>
+	<attr_x>1</attr_x>
+	<attr_y>15</attr_y>
+	<attr_z>0</attr_z>
+	<space_size>100</space_size>
+<group/>
+<toggleGrid>0</toggleGrid>
+</group>
