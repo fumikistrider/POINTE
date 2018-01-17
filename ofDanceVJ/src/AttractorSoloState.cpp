@@ -261,6 +261,9 @@ void AttractorSoloState::draw() {
 
 	ofSetColor(255,255,255,255);
 	fbo.draw(0, 0);
+
+	glDisable(GL_LIGHTING);
+	glDisable(GL_DEPTH_TEST);
 	gui.draw();
 
 }
