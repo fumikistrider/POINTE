@@ -147,7 +147,7 @@ void StageState::update() {
 		stage.setPosition(0, 0, 0);
 		ofRotate(180);
 		//material_stage.begin();
-		stage.enableMaterials();
+		//stage.enableMaterials();
 		stage.drawFaces();
 		//material_stage.end();
 		ofPopMatrix();
@@ -160,21 +160,33 @@ void StageState::update() {
 		for (int i = 0; i < flock.attractionPoints.size(); i++) {
 			AttractionPoint3d * ap = flock.attractionPoints[i];
 			ofPushMatrix();
-			ofTranslate(ap->x + 10, ap->y, ap->z);
-			//// Shoes
-			ofScale(0.05, 0.05, 0.05);
-			ofVec3f qaxis;
-			float qangle;
-			quatLeft.getRotate(qangle, qaxis);
-			ofRotate(180);
-			ofRotate(qangle, qaxis.x, qaxis.y, qaxis.z);
-			//ofRotateZ(180);
-			lightShoes.lookAt(ofVec3f(0, 0, 0));
-			lightShoes.setPosition(camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
-			//lightShoes.enable();
-			ofSetColor(255, 255, 255, 255);
-			orpheLeft.drawFaces();
-			//lightShoes.disable();
+			{
+				//// Left Shoes
+				ofTranslate(ap->x + 10, ap->y, ap->z);
+				ofScale(0.05, 0.05, 0.05);
+				ofVec3f qaxis;
+				float qangle;
+				quatLeft.getRotate(qangle, qaxis);
+				ofRotate(180);
+				ofRotate(qangle, qaxis.x, qaxis.y, qaxis.z);
+				ofSetColor(255, 255, 255, 255);
+				orpheLeft.drawFaces();
+			}
+			ofPopMatrix();
+
+			ofPushMatrix();
+			{
+				//// Right Shoes
+				ofTranslate(ap->x - 10, ap->y, ap->z);
+				ofScale(0.05, 0.05, 0.05);
+				ofVec3f qaxis;
+				float qangle;
+				quatRight.getRotate(qangle, qaxis);
+				ofRotate(180);
+				ofRotate(qangle, qaxis.x, qaxis.y, qaxis.z);
+				ofSetColor(255, 255, 255, 255);
+				orpheRight.drawFaces();
+			}
 			ofPopMatrix();
 
 		}
