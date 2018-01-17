@@ -2,7 +2,7 @@
 #include "RedState.h"
 #include "GreenState.h"
 #include "AttractorSoloState.h"
-#include "StageState.h"
+//#include "StageState.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -32,8 +32,8 @@ void ofApp::setup(){
 	stateMachine.addState<RedState>();
 	stateMachine.addState<GreenState>();
 	stateMachine.addState<AttractorSoloState>();
-	stateMachine.addState<StageState>();
-	stateMachine.changeState("Stage");
+//	stateMachine.addState<StageState>();
+	stateMachine.changeState("AttractorSolo");
 }
 
 //--------------------------------------------------------------
