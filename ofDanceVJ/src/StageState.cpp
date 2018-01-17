@@ -40,8 +40,8 @@ void StageState::setup() {
 
 	ofEnableSmoothing();
 	light.enable();
-	light.setDirectional();
-	light.setPosition(0, 300, 300);
+	light.setPointLight();
+	light.setPosition(0, 500, 100);
 	light.setAmbientColor(ofFloatColor(1.0, 1.0, 1.0, 1.0));
 	light.setDiffuseColor(ofFloatColor(0.8, 0.8, 1.0));
 	light.setSpecularColor(ofFloatColor(1.0, 1.0, 1.0));
@@ -118,6 +118,7 @@ void StageState::update() {
 	{
 		ofClear(0);
 		ofEnableDepthTest();
+		ofEnableLighting();
 		camera.begin();
 
 		ofPushMatrix();
@@ -204,6 +205,9 @@ void StageState::draw() {
 
 	ofSetColor(255);
 	fbo.draw(0, 0);
+
+	glDisable(GL_LIGHTING);
+	glDisable(GL_DEPTH_TEST);
 	gui.draw();
 
 }
