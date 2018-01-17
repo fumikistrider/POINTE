@@ -211,6 +211,7 @@
     <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp" />
     <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp" />
     <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp" />
+    <ClCompile Include="src\StageState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AttractorSoloState.h" />
@@ -307,6 +308,7 @@
     <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h" />
     <ClInclude Include="..\..\..\addons\ofxStateMachine\src\ofxState.h" />
     <ClInclude Include="..\..\..\addons\ofxStateMachine\src\ofxStateMachine.h" />
+    <ClInclude Include="src\StageState.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

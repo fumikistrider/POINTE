@@ -1,19 +1,16 @@
-#include "AttractorSoloState.h"
+#include "StageState.h"
 
 //--------------------------------------------------------------
-string AttractorSoloState::getName() {
-	return "AttractorSolo";
+string StageState::getName() {
+	return "Stage";
 }
 
 
 //--------------------------------------------------------------
-void AttractorSoloState::setup() {
+void StageState::setup() {
 	ofEnableAlphaBlending();
 
 	gui.setup();
-
-	osc.setup(12345);
-	oscSender.setup("127.0.0.1", 12346);
 
 	gui.add(boid_vector.setup("boid_vector", false));
 	gui.add(align.setup("align", 65, 0, 100));
@@ -43,12 +40,13 @@ void AttractorSoloState::setup() {
 	camera.setPosition(camera_x, camera_y, camera_z);
 	camera.lookAt(ofVec3f(camera_lookat_x, camera_lookat_y, camera_lookat_z));
 
+	ofEnableSmoothing();
 	light.enable();
 	light.setDirectional();
 	//light.lookAt(ofVec3f(0, 0, 0));
-	light.setPosition(0, 500, 0);
+	light.setPosition(0, 300, 300);
 	light.setAmbientColor(ofFloatColor(1.0, 1.0, 1.0, 1.0));
-	light.setDiffuseColor(ofFloatColor(0.2, 0.2, 1.0));
+	light.setDiffuseColor(ofFloatColor(0.8, 0.8, 1.0));
 	light.setSpecularColor(ofFloatColor(1.0, 1.0, 1.0));
 
 	lightShoes.setSpotlight();
@@ -71,6 +69,7 @@ void AttractorSoloState::setup() {
 
 	orpheLeft.loadModel("Orphe3D_L.3ds", false);
 	orpheRight.loadModel("Orphe3D_R.3ds", false);
+	stage.loadModel("Cyclorama.fbx");
 
 	fbo.allocate(ofGetWidth(), ofGetHeight());
 
@@ -78,7 +77,7 @@ void AttractorSoloState::setup() {
 
 
 //--------------------------------------------------------------
-void AttractorSoloState::stateExit() {
+void StageState::stateExit() {
 
 	gui.saveToFile("gui.xml");
 
@@ -86,64 +85,7 @@ void AttractorSoloState::stateExit() {
 
 
 //--------------------------------------------------------------
-void AttractorSoloState::update() {
-
-	// check for waiting messages
-	while (osc.hasWaitingMessages()) {
-		// get the next message
-		ofxOscMessage m;
-		osc.getNextMessage(m);
-
-		// check for Orphe Hub
-		if (m.getAddress() == "/RIGHT/sensorValues" || m.getAddress() == "/LEFT/sensorValues") {
-			attr_x = m.getArgAsFloat(3) * -100;
-			attr_y = m.getArgAsFloat(2) * -100;
-			attr_z = m.getArgAsFloat(1) * -100;
-
-			// Shoes quat
-			quatLeft.w() = m.getArgAsFloat(0);
-			quatLeft.x() = m.getArgAsFloat(2);
-			quatLeft.y() = m.getArgAsFloat(3);
-			quatLeft.z() = m.getArgAsFloat(1);
-
-			if (m.getArgAsFloat(9) < 0) {
-				max_speed = 0.1;
-				attr_force = 1.0;
-			}
-
-			float accel = abs(m.getArgAsFloat(7)) + abs(m.getArgAsFloat(8));
-			if (accel > 1.0) {
-				attr_dist = attr_dist + accel;
-			}
-		}
-		else if (m.getAddress() == "/RIGHT/gesture" || m.getAddress() == "/LEFT/gesture") {
-
-			string type = m.getArgAsString(0);
-			string dir = m.getArgAsString(1);
-
-			if (type == "STEP" && dir == "TOE") {
-				attr_force = attr_force + m.getArgAsFloat(2);
-				if (attr_force > 1.0) attr_force = 1.0;
-			}
-		}
-		// check for Duration
-		else if (m.getAddress() == "/camera_x") {
-			camera.setPosition(m.getArgAsFloat(0),
-				camera.getPosition().y,
-				camera.getPosition().z);
-		}
-		else if (m.getAddress() == "/camera_y") {
-			camera.setPosition(camera.getPosition().x,
-				m.getArgAsFloat(0),
-				camera.getPosition().z);
-		}
-		else if (m.getAddress() == "/camera_z") {
-			camera.setPosition(camera.getPosition().x,
-				camera.getPosition().y,
-				m.getArgAsFloat(0));
-		}
-
-	}
+void StageState::update() {
 
 	flock.setBounds(-space_size, -space_size, -space_size, space_size, space_size, space_size);
 	flock.setAlign(align);
@@ -181,9 +123,13 @@ void AttractorSoloState::update() {
 		ofEnableDepthTest();
 		camera.begin();
 
-		ofSetColor(255, 64);
-		int rep = space_size / 10;
-		ofDrawGrid(10.0f, rep, true);
+		ofPushMatrix();
+		ofSetColor(255, 255, 255, 255);
+		stage.setScale(1, 1, 1);
+		stage.setPosition(0, 0, 0);
+		ofRotate(180);
+		stage.drawFaces();
+		ofPopMatrix();
 
 		for (int i = 0; i < flock.attractionPoints.size(); i++) {
 			AttractionPoint3d * ap = flock.attractionPoints[i];
@@ -257,9 +203,9 @@ void AttractorSoloState::update() {
 
 
 //--------------------------------------------------------------
-void AttractorSoloState::draw() {
+void StageState::draw() {
 
-	ofSetColor(255,255,255,255);
+	ofSetColor(255);
 	fbo.draw(0, 0);
 	gui.draw();
 
@@ -267,23 +213,8 @@ void AttractorSoloState::draw() {
 
 
 //--------------------------------------------------------------
-void AttractorSoloState::keyPressed(int key) {
+void StageState::keyPressed(int key) {
 
-	if (key == ' ') {
-		ofxOscMessage m;
-		m.setAddress("/camera_x");
-		m.addFloatArg(camera_x);
-		oscSender.sendMessage(m);
-
-		m.setAddress("/camera_y");
-		m.addFloatArg(camera_y);
-		oscSender.sendMessage(m);
-
-		m.setAddress("/camera_z");
-		m.addFloatArg(camera_z);
-		oscSender.sendMessage(m);
-
-	}
 
 }
 

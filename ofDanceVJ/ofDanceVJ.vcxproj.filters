@@ -127,6 +127,9 @@
     <ClCompile Include="src\AttractorSoloState.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\StageState.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -504,6 +507,9 @@
       <Filter>addons\ofxStateMachine\src</Filter>
     </ClInclude>
     <ClInclude Include="src\AttractorSoloState.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StageState.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
