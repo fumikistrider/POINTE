@@ -11,7 +11,6 @@ void StageState::setup() {
 	ofEnableAlphaBlending();
 
 	gui.setup();
-
 	gui.add(boid_vector.setup("boid_vector", false));
 	gui.add(align.setup("align", 65, 0, 100));
 	gui.add(cohesion.setup("cohesion", 20, 0, 100));
@@ -34,7 +33,6 @@ void StageState::setup() {
 	gui.add(attr_y.setup("attr_y", 0, -100, 100));
 	gui.add(attr_z.setup("attr_z", 0, -100, 100));
 	gui.add(space_size.setup("space_size", 100, 100, 250));
-
 	gui.loadFromFile("gui.xml");
 
 	camera.setPosition(camera_x, camera_y, camera_z);
@@ -43,7 +41,6 @@ void StageState::setup() {
 	ofEnableSmoothing();
 	light.enable();
 	light.setDirectional();
-	//light.lookAt(ofVec3f(0, 0, 0));
 	light.setPosition(0, 300, 300);
 	light.setAmbientColor(ofFloatColor(1.0, 1.0, 1.0, 1.0));
 	light.setDiffuseColor(ofFloatColor(0.8, 0.8, 1.0));

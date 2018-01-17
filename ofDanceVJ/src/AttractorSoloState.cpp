@@ -44,7 +44,7 @@ void AttractorSoloState::setup() {
 	camera.lookAt(ofVec3f(camera_lookat_x, camera_lookat_y, camera_lookat_z));
 
 	light.enable();
-	light.setDirectional();
+	light.setPointLight();
 	//light.lookAt(ofVec3f(0, 0, 0));
 	light.setPosition(0, 500, 0);
 	light.setAmbientColor(ofFloatColor(1.0, 1.0, 1.0, 1.0));
