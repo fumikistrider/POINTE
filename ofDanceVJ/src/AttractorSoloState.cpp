@@ -37,8 +37,8 @@ void AttractorSoloState::setup() {
 	gui.add(attr_y.setup("attr_y", 0, -100, 100));
 	gui.add(attr_z.setup("attr_z", 0, -100, 100));
 	gui.add(space_size.setup("space_size", 100, 100, 250));
-	gui.add(bg_color_start.setup("start", ofColor(0, 0, 0, 255), ofColor(0, 0, 0, 0), ofColor(255, 255, 255, 255)));
-	gui.add(bg_color_end.setup("end", ofColor(0, 0, 0, 255), ofColor(0, 0, 0, 0), ofColor(255, 255, 255, 255)));
+	gui.add(bg_color_start.setup("bg_color_start", ofColor(0, 0, 0, 255), ofColor(0, 0, 0, 0), ofColor(255, 255, 255, 255)));
+	gui.add(bg_color_end.setup("bg_color_end", ofColor(0, 0, 0, 255), ofColor(0, 0, 0, 0), ofColor(255, 255, 255, 255)));
 	gui.loadFromFile("gui.xml");
 
 	camera.setPosition(camera_x, camera_y, camera_z);
@@ -80,6 +80,12 @@ void AttractorSoloState::setup() {
 
 //--------------------------------------------------------------
 void AttractorSoloState::stateExit() {
+
+	gui.saveToFile("gui.xml");
+
+}
+//--------------------------------------------------------------
+AttractorSoloState::~AttractorSoloState() {
 
 	gui.saveToFile("gui.xml");
 

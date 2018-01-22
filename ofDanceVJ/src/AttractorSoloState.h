@@ -13,6 +13,7 @@
 class AttractorSoloState : public itg::ofxState<SharedData> {
 
 public:
+	~AttractorSoloState();
 	void setup();
 	void update();
 	void draw();

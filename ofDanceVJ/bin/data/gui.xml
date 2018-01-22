@@ -19,7 +19,9 @@
 	<camera_y>114.147</camera_y>
 	<camera_z>307.358</camera_z>
 <camera_lookat_x>0.398117</camera_lookat_x>
-	<camera_lookat_y>-0.319369</camera_lookat_y>
+	<camera_lookat_y>-0.319368</camera_lookat_y>
 	<camera_lookat_z>-0.859946</camera_lookat_z>
 <space_size>183</space_size>
+<bg_color_start>0, 80, 80, 226</bg_color_start>
+	<bg_color_end>123, 0, 0, 226</bg_color_end>
 </group>
