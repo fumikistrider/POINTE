@@ -46,6 +46,9 @@ public:
 	ofxFloatSlider camera_lookat_y;
 	ofxFloatSlider camera_lookat_z;
 	ofxIntSlider   space_size;
+	ofxColorSlider bg_color_start;
+	ofxColorSlider bg_color_end;
+
 
 	ofLight light;
 	ofLight lightShoes;

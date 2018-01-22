@@ -11,6 +11,9 @@ void ofApp::setup(){
 	stateMachine.getSharedData().counter = 0;
 	stateMachine.getSharedData().lastUpdate = ofGetElapsedTimeMillis();
 
+	stateMachine.getSharedData().oscReceiver.setup(55555);
+	stateMachine.getSharedData().oscSender.setup("127.0.0.1", 55550);
+
 	// print input ports to console
 	midiIn.listPorts(); 
 
@@ -33,7 +36,8 @@ void ofApp::setup(){
 	stateMachine.addState<GreenState>();
 	stateMachine.addState<AttractorSoloState>();
 	stateMachine.addState<StageState>();
-	stateMachine.changeState("Stage");
+	stateMachine.changeState("AttractorSolo");
+	//stateMachine.changeState("Stage");
 }
 
 //--------------------------------------------------------------

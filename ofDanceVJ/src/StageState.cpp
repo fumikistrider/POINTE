@@ -12,6 +12,7 @@ void StageState::setup() {
 
 	gui.setup();
 	gui.add(toggleGrid.setup("toggleGrid", false));
+	gui.add(toggleCamera.setup("toggleCamera", false));
 	gui.add(align.setup("align", 65, 0, 100));
 	gui.add(cohesion.setup("cohesion", 20, 0, 100));
 	gui.add(separate.setup("separate", 28, 0, 100));
@@ -102,6 +103,34 @@ StageState::~StageState() {
 
 //--------------------------------------------------------------
 void StageState::update() {
+
+	// check for waiting messages
+	while (getSharedData().oscReceiver.hasWaitingMessages()) {
+		// get the next message
+		ofxOscMessage m;
+		getSharedData().oscReceiver.getNextMessage(m);
+		cout << "StageStage[OSC] :" << m.getAddress() << endl;
+
+		if (m.getAddress() == "/camera/switch") {
+			toggleCamera = m.getArgAsBool(0);
+		}
+
+		if (toggleCamera) {
+			if (m.getAddress() == "/camera/radius") {
+				radius = m.getArgAsFloat(0);
+			}
+			else if (m.getAddress() == "/camera/degree") {
+				degree = m.getArgAsFloat(0);
+			}
+
+			camera.setPosition(
+				radius * cos(ofDegToRad(degree)),
+				camera.getPosition().y,
+				radius * sin(ofDegToRad(degree))
+			);
+		}
+
+	}
 
 	for (int i = 0; i < flock.attractionPoints.size(); i++) {
 		AttractionPoint3d * ap = flock.attractionPoints[i];

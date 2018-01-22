@@ -11,16 +11,17 @@
 	<max_turn>75</max_turn>
 	<attr_force>-0.71</attr_force>
 	<attr_dist>80</attr_dist>
-	<camera_x>-19.4098</camera_x>
-	<camera_y>106.545</camera_y>
-	<camera_z>218.427</camera_z>
-	<camera_lookat_x>0.0796134</camera_lookat_x>
-	<camera_lookat_y>-0.437016</camera_lookat_y>
-	<camera_lookat_z>-0.895923</camera_lookat_z>
+	<camera_x>-4.73923e-06</camera_x>
+	<camera_y>29.2452</camera_y>
+	<camera_z>108.421</camera_z>
+	<camera_lookat_x>4.2203e-08</camera_lookat_x>
+	<camera_lookat_y>-0.260429</camera_lookat_y>
+	<camera_lookat_z>-0.965493</camera_lookat_z>
 	<attr_x>0</attr_x>
 	<attr_y>15</attr_y>
 	<attr_z>0</attr_z>
 	<space_size>100</space_size>
 <group/>
 <toggleGrid>0</toggleGrid>
+<toggleCamera>1</toggleCamera>
 </group>

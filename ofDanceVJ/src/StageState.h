@@ -25,6 +25,7 @@ public:
 	Flock3d flock;
 	ofxPanel gui;
 	ofxToggle toggleGrid;
+	ofxToggle toggleCamera;
 	ofxFloatSlider align;
 	ofxFloatSlider cohesion;
 	ofxFloatSlider separate;
@@ -57,6 +58,7 @@ public:
 	ofMaterial material_stage;
 
 	ofxGrabCam camera;
+	float radius, degree;
 	ofMatrix4x4 savedPose;
 	ofFbo fbo;
 

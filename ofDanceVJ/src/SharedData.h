@@ -31,6 +31,7 @@
  */
 #pragma once
 #include "ofxMidi.h"
+#include "ofxOsc.h"
 
 class SharedData
 {
@@ -39,4 +40,7 @@ public:
 	int lastUpdate;
 	ofTrueTypeFont font;
 	ofxMidiMessage midiMessage;
+	ofxOscReceiver oscReceiver;
+	ofxOscSender   oscSender;
+
 };
