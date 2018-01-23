@@ -114,8 +114,8 @@ void AttractorSoloState::update() {
 			quatLeft.z() = m.getArgAsFloat(1);
 
 			if (m.getArgAsFloat(9) < 0) {
-				max_speed = 0.1;
-				attr_force = 1.0;
+				//max_speed = 0.1;
+				//attr_force = 1.0;
 			}
 
 			float accel = abs(m.getArgAsFloat(7)) + abs(m.getArgAsFloat(8));
@@ -129,6 +129,7 @@ void AttractorSoloState::update() {
 			string dir = m.getArgAsString(1);
 
 			if (type == "STEP" && dir == "TOE") {
+				max_speed = 0.1;
 				attr_force = attr_force + m.getArgAsFloat(2);
 				if (attr_force > 1.0) attr_force = 1.0;
 			}
