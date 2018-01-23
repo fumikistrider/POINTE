@@ -171,6 +171,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\AttractorQuadState.cpp" />
     <ClCompile Include="src\AttractorSoloState.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
@@ -214,6 +215,7 @@
     <ClCompile Include="src\StageState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AttractorQuadState.h" />
     <ClInclude Include="src\AttractorSoloState.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\GreenState.h" />

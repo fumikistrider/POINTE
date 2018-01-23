@@ -43,4 +43,25 @@ public:
 	ofxOscReceiver oscReceiver;
 	ofxOscSender   oscSender;
 
+	// MIDI Out
+	ofxMidiOut midiOut;
+	int channel;
+	unsigned int currentPgm;
+	int note, velocity;
+	int pan, bend, touch, polytouch;
+
+	void setupMidi() {
+		midiOut.listPorts(); // via instance
+		midiOut.openPort(0); // by number
+		channel = 1;
+		currentPgm = 0;
+		note = 0;
+		velocity = 0;
+		pan = 0;
+		bend = 0;
+		touch = 0;
+		polytouch = 0;
+
+	}
+
 };

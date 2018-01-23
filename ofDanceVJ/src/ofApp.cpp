@@ -2,6 +2,7 @@
 #include "RedState.h"
 #include "GreenState.h"
 #include "AttractorSoloState.h"
+#include "AttractorQuadState.h"
 #include "StageState.h"
 
 //--------------------------------------------------------------
@@ -13,6 +14,8 @@ void ofApp::setup(){
 
 	stateMachine.getSharedData().oscReceiver.setup(55555);
 	stateMachine.getSharedData().oscSender.setup("127.0.0.1", 55550);
+
+	stateMachine.getSharedData().setupMidi();
 
 	// print input ports to console
 	midiIn.listPorts(); 
@@ -35,8 +38,9 @@ void ofApp::setup(){
 	stateMachine.addState<RedState>();
 	stateMachine.addState<GreenState>();
 	stateMachine.addState<AttractorSoloState>();
+	stateMachine.addState<AttractorQuadState>();
 	stateMachine.addState<StageState>();
-	stateMachine.changeState("AttractorSolo");
+	stateMachine.changeState("AttractorQuad");
 	//stateMachine.changeState("Stage");
 }
 
