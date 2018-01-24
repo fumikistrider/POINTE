@@ -107,6 +107,10 @@ void AttractorSoloState::update() {
 			attr_y = m.getArgAsFloat(2) * -100;
 			attr_z = m.getArgAsFloat(1) * -100;
 
+			// MIDI out
+			getSharedData().midiOut.sendControlChange(1, 12, ofMap(m.getArgAsFloat(3), -1.0, 1.0, 0, 127));  // touchpad x
+			getSharedData().midiOut.sendControlChange(1, 12, ofMap(m.getArgAsFloat(2), -1.0, 1.0, 0, 127));  // touchpad y
+
 			// Shoes quat
 			quatLeft.w() = m.getArgAsFloat(0);
 			quatLeft.x() = m.getArgAsFloat(2);
@@ -127,6 +131,8 @@ void AttractorSoloState::update() {
 
 			string type = m.getArgAsString(0);
 			string dir = m.getArgAsString(1);
+
+			getSharedData().midiOut.sendControlChange(1, 92, 1); // touchpad on-off
 
 			if (type == "STEP" && dir == "TOE") {
 				max_speed = 0.1;
