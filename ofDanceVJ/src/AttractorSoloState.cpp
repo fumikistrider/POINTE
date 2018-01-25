@@ -100,7 +100,7 @@ void AttractorSoloState::update() {
 		// get the next message
 		ofxOscMessage m;
 		osc.getNextMessage(m);
-
+		cout << m.getAddress() << endl;
 		// check for Orphe Hub
 		if (m.getAddress() == "/RIGHT/sensorValues" || m.getAddress() == "/LEFT/sensorValues") {
 			attr_x = m.getArgAsFloat(3) * -100;
@@ -108,8 +108,8 @@ void AttractorSoloState::update() {
 			attr_z = m.getArgAsFloat(1) * -100;
 
 			// MIDI out
-			getSharedData().midiOut.sendControlChange(1, 12, ofMap(m.getArgAsFloat(3), -1.0, 1.0, 0, 127));  // touchpad x
-			getSharedData().midiOut.sendControlChange(1, 12, ofMap(m.getArgAsFloat(2), -1.0, 1.0, 0, 127));  // touchpad y
+			//getSharedData().midiOut.sendControlChange(1, 12, ofMap(m.getArgAsFloat(3), -1.0, 1.0, 0, 127));  // touchpad x
+			//getSharedData().midiOut.sendControlChange(1, 12, ofMap(m.getArgAsFloat(2), -1.0, 1.0, 0, 127));  // touchpad y
 
 			// Shoes quat
 			quatLeft.w() = m.getArgAsFloat(0);
@@ -124,7 +124,7 @@ void AttractorSoloState::update() {
 
 			float accel = abs(m.getArgAsFloat(7)) + abs(m.getArgAsFloat(8));
 			if (accel > 1.0) {
-				attr_dist = attr_dist + accel;
+				//attr_dist = attr_dist + accel;
 			}
 		}
 		else if (m.getAddress() == "/RIGHT/gesture" || m.getAddress() == "/LEFT/gesture") {
@@ -132,10 +132,10 @@ void AttractorSoloState::update() {
 			string type = m.getArgAsString(0);
 			string dir = m.getArgAsString(1);
 
-			getSharedData().midiOut.sendControlChange(1, 92, 1); // touchpad on-off
+			//getSharedData().midiOut.sendControlChange(1, 92, 1); // touchpad on-off
 
 			if (type == "STEP" && dir == "TOE") {
-				max_speed = 0.1;
+				//max_speed = 0.1;
 				attr_force = attr_force + m.getArgAsFloat(2);
 				if (attr_force > 1.0) attr_force = 1.0;
 			}

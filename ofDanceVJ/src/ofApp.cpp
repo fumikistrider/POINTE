@@ -15,12 +15,12 @@ void ofApp::setup(){
 	stateMachine.getSharedData().oscReceiver.setup(55555);
 	stateMachine.getSharedData().oscSender.setup("127.0.0.1", 55550);
 
-	stateMachine.getSharedData().setupMidi();
+	//stateMachine.getSharedData().setupMidi();
 
 	// print input ports to console
 	midiIn.listPorts(); 
 
-	midiIn.openPort(0);
+	//midiIn.openPort(0);
 	//midiIn.openPort("IAC Pure Data In");	// by name
 	//midiIn.openVirtualPort("ofxMidiIn Input"); // open a virtual port
 
@@ -40,8 +40,8 @@ void ofApp::setup(){
 	stateMachine.addState<AttractorSoloState>();
 	stateMachine.addState<AttractorQuadState>();
 	stateMachine.addState<StageState>();
-	stateMachine.changeState("AttractorQuad");
-	//stateMachine.changeState("Stage");
+	//stateMachine.changeState("AttractorSolo");
+	stateMachine.changeState("Stage");
 }
 
 //--------------------------------------------------------------
@@ -76,7 +76,7 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
 		miditext << endl << " L (ex):" << midiMessage.toString();
 	}
 
-	cout << miditext << endl;
+//	cout << miditext << endl;
 
 
 }

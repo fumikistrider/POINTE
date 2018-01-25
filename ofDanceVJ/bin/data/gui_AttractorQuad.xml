@@ -12,16 +12,16 @@
 	<attr_force>-0.71</attr_force>
 	<attr_dist>80</attr_dist>
 <group/>
-<attr_x>-75</attr_x>
+<attr_x>35</attr_x>
 	<attr_y>11</attr_y>
 	<attr_z>100</attr_z>
-<camera_x>-142.293</camera_x>
-	<camera_y>114.147</camera_y>
-	<camera_z>307.358</camera_z>
-<camera_lookat_x>0.398117</camera_lookat_x>
-	<camera_lookat_y>-0.319368</camera_lookat_y>
-	<camera_lookat_z>-0.859946</camera_lookat_z>
-<space_size>183</space_size>
+<camera_x>8.03725</camera_x>
+	<camera_y>92.4452</camera_y>
+	<camera_z>373.287</camera_z>
+<camera_lookat_x>-0.0208951</camera_lookat_x>
+	<camera_lookat_y>-0.240337</camera_lookat_y>
+	<camera_lookat_z>-0.970465</camera_lookat_z>
+<space_size>166</space_size>
 <bg_color_start>0, 80, 80, 226</bg_color_start>
 	<bg_color_end>123, 0, 0, 226</bg_color_end>
 </group>
