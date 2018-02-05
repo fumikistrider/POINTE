@@ -40,8 +40,8 @@ void ofApp::setup(){
 	stateMachine.addState<AttractorSoloState>();
 	stateMachine.addState<AttractorQuadState>();
 	stateMachine.addState<StageState>();
-	//stateMachine.changeState("AttractorSolo");
-	stateMachine.changeState("Stage");
+	stateMachine.changeState("AttractorSolo");
+	//stateMachine.changeState("Stage");
 }
 
 //--------------------------------------------------------------
@@ -83,7 +83,15 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	if (key == '1') {
+		stateMachine.changeState("AttractorSolo");
+	}
+	else if (key == '2') {
+		stateMachine.changeState("Stage");
+	}
+	else if (key == 'f') {
+		ofToggleFullscreen();
+	}
 }
 
 //--------------------------------------------------------------

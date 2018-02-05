@@ -101,60 +101,82 @@ void AttractorSoloState::update() {
 		ofxOscMessage m;
 		osc.getNextMessage(m);
 		cout << m.getAddress() << endl;
+
+		vector<string> address;
+		address = ofSplitString(m.getAddress(), "/");
+
 		// check for Orphe Hub
-		if (m.getAddress() == "/RIGHT/sensorValues" || m.getAddress() == "/LEFT/sensorValues") {
-			attr_x = m.getArgAsFloat(3) * -100;
-			attr_y = m.getArgAsFloat(2) * -100;
-			attr_z = m.getArgAsFloat(1) * -100;
-
-			// MIDI out
-			//getSharedData().midiOut.sendControlChange(1, 12, ofMap(m.getArgAsFloat(3), -1.0, 1.0, 0, 127));  // touchpad x
-			//getSharedData().midiOut.sendControlChange(1, 12, ofMap(m.getArgAsFloat(2), -1.0, 1.0, 0, 127));  // touchpad y
-
-			// Shoes quat
-			quatLeft.w() = m.getArgAsFloat(0);
-			quatLeft.x() = m.getArgAsFloat(2);
-			quatLeft.y() = m.getArgAsFloat(3);
-			quatLeft.z() = m.getArgAsFloat(1);
-
-			if (m.getArgAsFloat(9) < 0) {
-				//max_speed = 0.1;
-				//attr_force = 1.0;
+		// - quaternion
+		if (address[2] == "quat") {
+			if (m.getAddress() == "/L/quat/X") {
+				quatLeft.x() = m.getArgAsFloat(0);
 			}
-
-			float accel = abs(m.getArgAsFloat(7)) + abs(m.getArgAsFloat(8));
-			if (accel > 1.0) {
-				//attr_dist = attr_dist + accel;
+			else if (m.getAddress() == "/L/quat/Y") {
+				quatLeft.y() = m.getArgAsFloat(0);
 			}
-		}
-		else if (m.getAddress() == "/RIGHT/gesture" || m.getAddress() == "/LEFT/gesture") {
-
-			string type = m.getArgAsString(0);
-			string dir = m.getArgAsString(1);
-
-			//getSharedData().midiOut.sendControlChange(1, 92, 1); // touchpad on-off
-
-			if (type == "STEP" && dir == "TOE") {
-				//max_speed = 0.1;
-				attr_force = attr_force + m.getArgAsFloat(2);
-				if (attr_force > 1.0) attr_force = 1.0;
+			else if (m.getAddress() == "/L/quat/Z") {
+				quatLeft.z() = m.getArgAsFloat(0);
+			}
+			else if (m.getAddress() == "/L/quat/W") {
+				quatLeft.w() = m.getArgAsFloat(0);
+			}
+			else if (m.getAddress() == "/R/quat/X") {
+				quatRight.x() = m.getArgAsFloat(0);
+			}
+			else if (m.getAddress() == "/R/quat/Y") {
+				quatRight.y() = m.getArgAsFloat(0);
+			}
+			else if (m.getAddress() == "/R/quat/Z") {
+				quatRight.z() = m.getArgAsFloat(0);
+			}
+			else if (m.getAddress() == "/R/quat/W") {
+				quatRight.w() = m.getArgAsFloat(0);
 			}
 		}
+
+		else if (address[2] == "sensorValues") {
+			if (m.getAddress() == "/RIGHT/sensorValues" || m.getAddress() == "/LEFT/sensorValues") {
+				attr_x = m.getArgAsFloat(3) * -100;
+				attr_y = m.getArgAsFloat(2) * -100;
+				attr_z = m.getArgAsFloat(1) * -100;
+
+				// Shoes quat
+				quatLeft.w() = m.getArgAsFloat(0);
+				quatLeft.x() = m.getArgAsFloat(2);
+				quatLeft.y() = m.getArgAsFloat(3);
+				quatLeft.z() = m.getArgAsFloat(1);
+
+			}
+		}
+
+		else if (address[2] == "gesture") {
+			if (m.getAddress() == "/RIGHT/gesture" || m.getAddress() == "/LEFT/gesture") {
+
+				string type = m.getArgAsString(0);
+				string dir = m.getArgAsString(1);
+
+				if (type == "STEP" && dir == "TOE") {
+					attr_force = attr_force + m.getArgAsFloat(2);
+					if (attr_force > 1.0) attr_force = 1.0;
+				}
+			}
+		}
+
 		// check for Duration
 		else if (m.getAddress() == "/camera_x") {
-			camera.setPosition(m.getArgAsFloat(0),
-				camera.getPosition().y,
-				camera.getPosition().z);
+			camera.setPosition( m.getArgAsFloat(0),
+								camera.getPosition().y,
+								camera.getPosition().z);
 		}
 		else if (m.getAddress() == "/camera_y") {
-			camera.setPosition(camera.getPosition().x,
-				m.getArgAsFloat(0),
-				camera.getPosition().z);
+			camera.setPosition( camera.getPosition().x,
+								m.getArgAsFloat(0),
+								camera.getPosition().z);
 		}
 		else if (m.getAddress() == "/camera_z") {
-			camera.setPosition(camera.getPosition().x,
-				camera.getPosition().y,
-				m.getArgAsFloat(0));
+			camera.setPosition( camera.getPosition().x,
+								camera.getPosition().y,
+								m.getArgAsFloat(0));
 		}
 
 	}
@@ -217,7 +239,7 @@ void AttractorSoloState::update() {
 			lightShoes.setPosition(camera.getPosition().x * 100, camera.getPosition().y * 100, camera.getPosition().z * 100);
 			lightShoes.enable();
 			ofSetColor(255, 255, 255, 255);
-			orpheLeft.drawFaces();
+			//orpheLeft.drawFaces();
 			lightShoes.disable();
 			ofPopMatrix();
 

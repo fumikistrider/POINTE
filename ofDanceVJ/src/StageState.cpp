@@ -111,9 +111,26 @@ void StageState::update() {
 		getSharedData().oscReceiver.getNextMessage(m);
 		cout << "StageStage[OSC] :" << m.getAddress() << endl;
 
-		if (m.getAddress() == "/camera/switch") {
-			toggleCamera = m.getArgAsBool(0);
+		if (m.getAddress() == "/RIGHT/sensorValues" ) {
+			attr_x = m.getArgAsFloat(3) * -100;
+			attr_y = m.getArgAsFloat(2) * -100;
+			attr_z = m.getArgAsFloat(1) * -100;
+
+			// Shoes quat
+			quatRight.w() = m.getArgAsFloat(0);
+			quatRight.x() = m.getArgAsFloat(2);
+			quatRight.y() = m.getArgAsFloat(3);
+			quatRight.z() = m.getArgAsFloat(1);
 		}
+
+		if (m.getAddress() == "/LEFT/sensorValues") {
+			// Shoes quat
+			quatLeft.w() = m.getArgAsFloat(0);
+			quatLeft.x() = m.getArgAsFloat(2);
+			quatLeft.y() = m.getArgAsFloat(3);
+			quatLeft.z() = m.getArgAsFloat(1);
+		}
+
 
 		if (toggleCamera) {
 			if (m.getAddress() == "/camera/radius") {
@@ -129,8 +146,8 @@ void StageState::update() {
 				radius * sin(ofDegToRad(degree))
 			);
 		}
-
 	}
+	// OSC Receive end
 
 	for (int i = 0; i < flock.attractionPoints.size(); i++) {
 		AttractionPoint3d * ap = flock.attractionPoints[i];
@@ -200,6 +217,7 @@ void StageState::update() {
 				ofRotate(qangle, qaxis.x, qaxis.y, qaxis.z);
 				ofSetColor(255, 255, 255, 255);
 				orpheLeft.drawFaces();
+
 			}
 			ofPopMatrix();
 
